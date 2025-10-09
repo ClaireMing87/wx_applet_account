@@ -1,0 +1,142 @@
+<view class="container">
+  <!-- 返回按钮 -->
+  <view class="header">
+    <view class="back-button" bindtap="onBack">
+      <text class="back-icon">←</text>
+      <text class="back-text">返回</text>
+    </view>
+    <text class="page-title">{{editingId ? '编辑记录' : '记一笔'}}</text>
+  </view>
+  
+  <!-- 类型选择 -->
+  <view class="card">
+    <view class="type-selector">
+      <view class="type-item {{recordType === 'expense' ? 'active' : ''}}" bindtap="selectType" data-type="expense">
+        <text class="type-icon">💸</text>
+        <text class="type-text">支出</text>
+      </view>
+      <view class="type-item {{recordType === 'income' ? 'active' : ''}}" bindtap="selectType" data-type="income">
+        <text class="type-icon">💰</text>
+        <text class="type-text">收入</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 分类选择 -->
+  <view class="card">
+    <text class="section-title">选择分类</text>
+    <view class="categories-grid">
+      <view class="category-item {{selectedCategory.id === item.id ? 'selected' : ''}}" 
+            wx:for="{{categories}}" 
+            wx:key="id" 
+            bindtap="selectCategory" 
+            data-category="{{item}}">
+        <text class="category-icon">{{selectedCategory.id === item.id && selectedCategory.subIcon ? selectedCategory.subIcon : item.icon}}</text>
+        <text class="category-name">{{selectedCategory.id === item.id && selectedCategory.subName ? (selectedCategory.name + '-' + selectedCategory.subName) : item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 账户选择 -->
+  <view class="card">
+    <view class="account-selector">
+      <view class="account-item" 
+            bindtap="selectAccount" 
+            data-account="account">
+        <text class="account-icon">{{selectedAccountIcon || '💳'}}</text>
+        <text class="account-text">{{selectedAccountName || '账户'}}</text>
+      </view>
+      <view class="account-item" 
+            bindtap="selectAccount" 
+            data-account="budget">
+        <text class="account-icon">🏦</text>
+        <text class="account-text">{{budgetScope === 'month' ? '计入当月预算' : budgetScope === 'year' ? '只计入年预算' : '不计入预算'}}</text>
+      </view>
+      <view class="account-item" 
+            bindtap="selectAccount" 
+            data-account="tag">
+        <text class="account-icon">🏷</text>
+        <text class="account-text">{{selectedTag ? selectedTag.name : '标签'}}</text>
+      </view>
+      <view class="account-item" 
+            bindtap="selectAccount" 
+            data-account="template">
+        <text class="account-icon">📒</text>
+        <text class="account-text">{{selectedTemplate ? selectedTemplate.name : '模板'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 金额、备注和日期 -->
+  <view class="card">
+    <view class="amount-note-date-row">
+      <view class="note-section">
+        <input class="note-input" type="text" value="{{note}}" bindinput="onNoteInput" placeholder="添加备注..." />
+      </view>
+          <view class="date-section">
+            <picker mode="multiSelector" range="{{dateTimeRange}}" value="{{dateTimeValue}}" bindchange="onDateTimeChange">
+              <view class="date-picker">
+                <text class="date-icon">📅</text>
+                <text class="date-text">{{displayDate}} {{String(dateTimeValue[3]).padStart(2, '0')}}:{{String(dateTimeValue[4]).padStart(2, '0')}}</text>
+                <text class="date-arrow">></text>
+              </view>
+            </picker>
+          </view>
+      <view class="amount-section">
+        <view class="amount-display">
+          <text class="currency">¥</text>
+          <text class="amount-text">{{amount || '0.00'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 九宫格数字键盘 -->
+  <view class="keyboard-section">
+    <view class="number-keyboard">
+      <view class="keyboard-row" wx:for="{{keyboardRows}}" wx:key="index">
+        <view class="keyboard-key {{key === '保存' ? 'save-key' : ''}}" 
+              wx:for="{{item}}" 
+              wx:for-item="key" 
+              wx:key="key"
+              bindtap="onKeyPress" 
+              data-key="{{key}}">
+          <text class="key-text {{key === '⌫' ? 'backspace' : ''}}">{{key}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 二级菜单弹窗 -->
+  <view class="sub-menu-overlay" wx:if="{{showSubMenu}}" bindtap="closeSubMenu">
+    <view class="sub-menu-popup" catchtap="">
+      <view class="sub-menu-header">
+        <text class="sub-menu-title">{{currentSubMenu === 'account' ? '选择账户' : currentSubMenu === 'budget' ? '选择预算' : currentSubMenu === 'tag' ? '选择标签' : currentSubMenu === 'template' ? '选择模板' : '选择分类'}}</text>
+        <text class="sub-menu-close" bindtap="closeSubMenu">×</text>
+      </view>
+      <view class="sub-menu-grid">
+        <view class="sub-menu-item" 
+              wx:for="{{subMenuItems}}" 
+              wx:key="id" 
+              bindtap="selectSubMenuItem" 
+              data-item="{{item}}">
+          <text class="sub-menu-icon">{{item.icon}}</text>
+          <text class="sub-menu-name">{{item.name}}</text>
+        </view>
+      </view>
+      <view wx:if="{{currentSubMenu === 'budget'}}" class="sub-menu-footer">
+        <view class="budget-options">
+          <view class="budget-option {{budgetScope === 'month' ? 'active' : ''}}" bindtap="selectBudgetScope" data-value="month">
+            <text>计入当月预算</text>
+          </view>
+          <view class="budget-option {{budgetScope === 'year' ? 'active' : ''}}" bindtap="selectBudgetScope" data-value="year">
+            <text>只计入年预算</text>
+          </view>
+          <view class="budget-option {{budgetScope === 'none' ? 'active' : ''}}" bindtap="selectBudgetScope" data-value="none">
+            <text>不计入预算</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

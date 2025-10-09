@@ -1,0 +1,87 @@
+<view class="container">
+  <!-- 顶部统计卡片 -->
+  <view class="card">
+    <view class="flex-between">
+      <view class="flex-column">
+        <text class="month-text">{{currentMonth}}月</text>
+        <text class="total-text">总支出</text>
+        <text class="amount-text expense">¥{{monthExpense}}</text>
+      </view>
+      <view class="flex-column">
+        <text class="month-text">⚙️</text>
+        <text class="total-text">总收入</text>
+        <text class="amount-text income">¥{{monthIncome}}</text>
+        <!-- <text class="balance-text">收支结余: ¥{{monthBalance}}</text> -->
+      </view>
+    </view>
+    <view class="budget-summary">
+      <view class="budget-item">
+        <text class="budget-label">当月预算结余</text>
+        <text class="budget-value">¥{{monthBudgetBalance}}</text>
+      </view>
+      <view class="budget-item">
+        <text class="budget-label">差额预算结余</text>
+        <text class="budget-value">¥{{diffBudgetBalance}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快速记账按钮 -->
+  <view class="card">
+    <view class="flex-between">
+      <text class="section-title">快速记账</text>
+      <button class="btn-primary" bindtap="goToAdd">记一笔</button>
+    </view>
+    
+    <!-- 常用分类 -->
+    <view class="categories mt-10">
+      <view class="category-item" wx:for="{{commonCategories}}" wx:key="id" bindtap="quickAdd" data-category="{{item}}">
+        <text class="category-icon">{{item.icon}}</text>
+        <text class="category-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近记录 -->
+  <view class="card">
+    <view class="flex-between">
+      <text class="section-title">最近记录</text>
+      <text class="view-all" bindtap="viewAllRecords">查看全部</text>
+    </view>
+    
+    <view class="records-list" wx:if="{{recentRecords.length > 0}}">
+      <view class="record-item" wx:for="{{recentRecords}}" wx:key="id">
+        <view class="flex-between">
+          <view class="flex">
+            <text class="category-icon">{{item.categoryIcon}}</text>
+            <view class="record-info">
+              <text class="record-title">{{item.categoryName}}</text>
+              <text class="record-note"
+               decode="{{ true }}" selectable="{{ false }}">{{item.accountDisplay}} · {{item.note || '无备注'}}</text>
+            </view>
+          </view>
+          <view class="record-amount {{item.type === 'expense' ? 'expense' : 'income'}}">
+            {{item.type === 'expense' ? '-' : '+'}}¥{{item.amount}}
+          </view>
+        </view>
+        <view class="record-time">{{item.createTime}}</view>
+      </view>
+    </view>
+    
+    <view class="empty-state" wx:else>
+      <text class="empty-text">还没有记账记录</text>
+      <text class="empty-hint">点击上方"记一笔"开始记账</text>
+    </view>
+  </view>
+
+  <!-- 本月趋势 -->
+  <view class="card">
+    <text class="section-title">本月趋势</text>
+    <view class="trend-chart">
+      <view class="chart-bar" wx:for="{{weekData}}" wx:key="day">
+        <view class="bar" style="height: {{item.expense / maxExpense * 100}}%"></view>
+        <text class="day-label">{{item.day}}</text>
+      </view>
+    </view>
+  </view>
+</view>

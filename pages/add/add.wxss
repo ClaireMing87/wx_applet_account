@@ -1,0 +1,475 @@
+/* 记账页面样式 */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* 头部样式 */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background: #fff;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 20rpx;
+  border-radius: 8rpx;
+  background: #f5f5f5;
+  transition: all 0.2s ease;
+}
+
+.back-button:active {
+  background: #e0e0e0;
+  transform: scale(0.95);
+}
+
+.back-icon {
+  font-size: 32rpx;
+  color: #333;
+  margin-right: 8rpx;
+}
+
+.back-text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.page-title {
+  flex: 1;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-right: 100rpx; /* 平衡左侧返回按钮的宽度 */
+}
+
+.card {
+  border-radius: 16rpx;
+  padding: 15rpx;
+  margin: 8rpx 15rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+.type-selector {
+  display: flex;
+  background: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 8rpx;
+}
+
+.type-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8rpx 4rpx;
+  border-radius: 8rpx;
+  transition: all 0.3s ease;
+}
+
+.type-item.active {
+  background: #fff;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.type-icon {
+  font-size: 28rpx;
+  margin-bottom: 4rpx;
+}
+
+.type-text {
+  font-size: 22rpx;
+  color: #333;
+}
+
+/* 金额、备注和日期同行样式 */
+.amount-note-date-row {
+  display: flex;
+  gap: 12rpx;
+  align-items: flex-start;
+}
+
+.amount-section {
+  flex: 1.8;
+  min-width: 0;
+}
+
+.note-section {
+  flex: 2.2;
+  min-width: 0;
+}
+
+.date-section {
+  flex: 1.2;
+  min-width: 0;
+}
+
+.amount-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60rpx;
+  padding: 12rpx;
+  background: #f8f9fa;
+  border-radius: 8rpx;
+  border: 1rpx solid #e0e0e0;
+  box-sizing: border-box;
+}
+
+.currency {
+  font-size: 32rpx;
+  color: #333;
+  margin-right: 8rpx;
+}
+
+.amount-text {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.number-keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 12rpx;
+}
+
+.keyboard-key {
+  flex: 1;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-radius: 10rpx;
+  transition: all 0.2s ease;
+}
+
+.keyboard-key:active {
+  background: #e9ecef;
+  transform: scale(0.95);
+}
+
+.keyboard-key.save-key {
+  background: #4CAF50;
+  color: #fff;
+}
+
+.keyboard-key.save-key:active {
+  background: #45a049;
+}
+
+.keyboard-key.save-key .key-text {
+  color: #fff;
+}
+
+.keyboard-key .key-text {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.keyboard-key .key-text.backspace {
+  font-size: 24rpx;
+}
+
+/* 账户选择样式 */
+.account-selector {
+  display: flex;
+  gap: 12rpx;
+}
+
+.account-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12rpx 8rpx;
+  background: #f8f9fa;
+  border-radius: 8rpx;
+  transition: all 0.3s ease;
+}
+
+/* 移除账户按钮的激活状态样式 */
+
+.account-icon {
+  font-size: 24rpx;
+  margin-bottom: 4rpx;
+}
+
+.account-text {
+  font-size: 20rpx;
+  color: #333;
+  text-align: center;
+}
+
+.budget-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.budget-switch-label {
+  color: #333;
+  font-size: 26rpx;
+}
+
+.sub-menu-footer {
+  padding: 20rpx 30rpx 30rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.budget-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16rpx;
+}
+.budget-option {
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  color: #333;
+}
+.budget-option.active {
+  background: #4CAF50;
+  color: #fff;
+}
+
+/* 二级菜单弹窗样式 */
+.sub-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sub-menu-popup {
+  background: #fff;
+  border-radius: 16rpx;
+  width: 600rpx;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.sub-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.sub-menu-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.sub-menu-close {
+  font-size: 40rpx;
+  color: #999;
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sub-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+  padding: 30rpx;
+}
+
+.sub-menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 10rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  transition: all 0.3s ease;
+}
+
+.sub-menu-item:active {
+  background: #e9ecef;
+  transform: scale(0.95);
+}
+
+.sub-menu-icon {
+  font-size: 32rpx;
+  margin-bottom: 8rpx;
+}
+
+.sub-menu-name {
+  font-size: 24rpx;
+  color: #333;
+  text-align: center;
+}
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 12rpx;
+  margin-top: 15rpx;
+  height: 400rpx;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8rpx 6rpx;
+  background: #f8f9fa;
+  border-radius: 8rpx;
+  transition: all 0.3s ease;
+  min-height: 60rpx;
+}
+
+.category-item.selected {
+  background: #4CAF50;
+  color: #fff;
+}
+
+.category-item.selected .category-name {
+  color: #fff;
+}
+
+.category-icon {
+  font-size: 24rpx;
+  margin-bottom: 4rpx;
+}
+
+.category-name {
+  font-size: 16rpx;
+  color: #333;
+  text-align: center;
+  line-height: 1.2;
+  word-break: break-all;
+}
+
+/* 九宫格数字键盘样式 */
+.keyboard-section {
+  background: #fff;
+  padding: 15rpx;
+  margin: 8rpx 15rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.1);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.number-keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 12rpx;
+}
+
+.keyboard-key {
+  flex: 1;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-radius: 10rpx;
+  transition: all 0.2s ease;
+}
+
+.keyboard-key:active {
+  background: #e9ecef;
+  transform: scale(0.95);
+}
+
+.keyboard-key.save-key {
+  background: #4CAF50;
+  color: #fff;
+}
+
+.keyboard-key.save-key:active {
+  background: #45a049;
+}
+
+.keyboard-key.save-key .key-text {
+  color: #fff;
+}
+
+.keyboard-key .key-text {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.keyboard-key .key-text.backspace {
+  font-size: 24rpx;
+}
+
+.note-input {
+  width: 100%;
+  height: 60rpx;
+  padding: 12rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  box-sizing: border-box; /* 确保边框不增加宽度 */
+}
+
+.date-picker {
+  display: flex;
+  align-items: center;
+  height: 60rpx;
+  padding: 12rpx;
+  background: #fff;
+  border-radius: 8rpx;
+  border: 1rpx solid #e0e0e0;
+  box-sizing: border-box;
+}
+
+.date-icon {
+  font-size: 18rpx;
+  margin-right: 6rpx;
+}
+
+.date-text {
+  font-size: 20rpx;
+  color: #333;
+  flex: 1;
+}
+
+.date-arrow {
+  font-size: 18rpx;
+  color: #999;
+  margin-left: auto;
+}
+
+

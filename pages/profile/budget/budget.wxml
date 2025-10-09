@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="card">
+    <text class="section-title">预算设置</text>
+    <view class="form-row">
+      <text class="label">年预算</text>
+      <input class="input" type="digit" placeholder="请输入年预算" value="{{yearBudgetInput}}" bindinput="onYearBudgetInput" />
+    </view>
+    <view class="form-row">
+      <text class="label">月预算</text>
+      <input class="input" type="digit" placeholder="请输入月预算" value="{{monthBudgetInput}}" bindinput="onMonthBudgetInput" />
+    </view>
+    <view class="form-row">
+      <text class="label">差额预算</text>
+      <view class="diff-box">¥{{diffBudgetDisplay}}</view>
+    </view>
+    <view class="hint">规则：年预算 ≥ 月预算 × 12</view>
+    <button class="btn-primary" bindtap="saveBudget">保存</button>
+  </view>
+
+  <view class="card">
+    <text class="section-title">预算说明</text>
+    <view class="desc">
+      <text>差额预算 = 年预算 - 月预算 × 12，即不计入当月常规预算，但计入全年总预算，可用于意外开支，或低频大额开支，如购买手机等。</text>
+    </view>
+  </view>
+</view>
+
+

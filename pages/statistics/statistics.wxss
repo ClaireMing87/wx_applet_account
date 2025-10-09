@@ -1,0 +1,183 @@
+/* 统计页面样式 */
+.time-selector {
+  text-align: center;
+}
+
+.month-picker {
+  display: inline-flex;
+  align-items: center;
+  padding: 20rpx 40rpx;
+  background: #f8f9fa;
+  border-radius: 8rpx;
+}
+
+.month-text {
+  font-size: 32rpx;
+  color: #333;
+  margin-right: 20rpx;
+}
+
+.picker-arrow {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 总览样式 */
+.overview {
+  display: flex;
+  justify-content: space-between;
+}
+
+.overview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.overview-label {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.overview-amount {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.overview-amount.expense {
+  color: #f44336;
+}
+
+.overview-amount.income {
+  color: #4CAF50;
+}
+
+/* 分类统计样式 */
+.category-stats {
+  margin-top: 20rpx;
+}
+
+.category-stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.category-stat-item:last-child {
+  border-bottom: none;
+}
+
+.category-info {
+  display: flex;
+  align-items: center;
+}
+
+.category-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+}
+
+.category-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-name {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 4rpx;
+}
+
+.category-percentage {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.category-amount {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+/* 图表占位符 */
+.chart-placeholder {
+  height: 200rpx;
+  background: #f8f9fa;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20rpx;
+}
+
+.chart-text {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 每日趋势样式 */
+.daily-trend {
+  margin-top: 20rpx;
+}
+
+.trend-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.trend-item:last-child {
+  border-bottom: none;
+}
+
+.trend-date {
+  font-size: 24rpx;
+  color: #666;
+  width: 80rpx;
+}
+
+.trend-bars {
+  display: flex;
+  align-items: flex-end;
+  height: 120rpx;
+  margin: 0 40rpx;
+  flex: 1;
+}
+
+.trend-bar {
+  width: 20rpx;
+  margin: 0 4rpx;
+  border-radius: 2rpx 2rpx 0 0;
+  min-height: 4rpx;
+}
+
+.trend-bar.expense {
+  background: #f44336;
+}
+
+.trend-bar.income {
+  background: #4CAF50;
+}
+
+.trend-amounts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 120rpx;
+}
+
+.trend-expense {
+  font-size: 22rpx;
+  color: #f44336;
+  margin-bottom: 4rpx;
+}
+
+.trend-income {
+  font-size: 22rpx;
+  color: #4CAF50;
+}

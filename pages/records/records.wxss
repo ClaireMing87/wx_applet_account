@@ -1,0 +1,53 @@
+.container { padding: 12rpx; }
+.card { background: #fff; border-radius: 16rpx; padding: 10rpx 20rpx; }
+.record-item { 
+  padding: 18rpx 0; 
+  border-bottom: 1rpx solid #f0f0f0; 
+  background: #fff; 
+  transition: transform 0.2s ease;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.record-item:last-child { 
+  border-bottom: none; 
+}
+.record-swipe { 
+  position: relative; 
+  overflow: hidden;
+  touch-action: pan-x;
+  width: 100%;
+}
+.swipe-actions { 
+  position: absolute; 
+  right: 0; 
+  top: 0; 
+  bottom: 0; 
+  display: flex; 
+  align-items: stretch;
+  z-index: 0;
+}
+.btn { 
+  width: 140rpx; 
+  color: #fff; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+.btn.edit { background: #FFA000; }
+.btn.delete { background: #F44336; }
+.button-hover {
+  opacity: 0.8;
+}
+.row { display: flex; align-items: center; }
+.icon { font-size: 40rpx; }
+.info { flex: 1; margin-left: 16rpx; }
+.title { font-size: 28rpx; color: #333; display: block; }
+.sub { font-size: 22rpx; color: #888; display: block; margin-top: 4rpx; }
+.time { font-size: 20rpx; color: #bbb; display: block; margin-top: 4rpx; }
+.amount { font-size: 30rpx; font-weight: 600; }
+.amount.expense { color: #f44336; }
+.amount.income { color: #4CAF50; }
+.empty { text-align: center; color: #999; padding: 80rpx 0; }
+

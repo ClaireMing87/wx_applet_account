@@ -1,0 +1,74 @@
+.container {
+  padding: 16rpx;
+}
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin: 12rpx 0;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+.section-title {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.form-row {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+}
+.label {
+  width: 160rpx;
+  color: #555;
+}
+.input {
+  flex: 1;
+  height: 70rpx;
+  background: #f7f8fa;
+  border-radius: 10rpx;
+  padding: 0 16rpx;
+}
+.diff-box {
+  flex: 1;
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 16rpx;
+  background: #fff7e6;
+  color: #ad6800;
+  border-radius: 10rpx;
+  border: 1rpx solid #ffe7ba;
+}
+.hint {
+  color: #888;
+  font-size: 22rpx;
+  margin: 10rpx 0 16rpx;
+}
+/* .btn-primary {
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 10rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+} */
+.btn-primary {
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 10rpx;
+  
+  /* 核心代码 */
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center;     /* 垂直居中 */
+  
+  /* 推荐使用 padding 来控制按钮大小，而不是固定 height */
+  padding: 0 30rpx;
+  height: 76rpx; /* 仍然可以保留 height 来限制最小高度 */
+}
+.desc {
+  color: #666;
+  line-height: 1.6;
+}
+

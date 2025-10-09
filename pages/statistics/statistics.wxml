@@ -1,0 +1,88 @@
+<view class="container">
+  <!-- 时间选择器 -->
+  <view class="card">
+    <view class="time-selector">
+      <picker mode="date" fields="month" value="{{selectedMonth}}" bindchange="onMonthChange">
+        <view class="month-picker">
+          <text class="month-text">{{selectedMonth}}</text>
+          <text class="picker-arrow">></text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 收支总览 -->
+  <view class="card">
+    <view class="overview">
+      <view class="overview-item">
+        <text class="overview-label">总支出</text>
+        <text class="overview-amount expense">¥{{totalExpense}}</text>
+      </view>
+      <view class="overview-item">
+        <text class="overview-label">总收入</text>
+        <text class="overview-amount income">¥{{totalIncome}}</text>
+      </view>
+      <view class="overview-item">
+        <text class="overview-label">结余</text>
+        <text class="overview-amount {{balance >= 0 ? 'income' : 'expense'}}">¥{{balance}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 支出分类统计 -->
+  <view class="card" wx:if="{{expenseCategories.length > 0}}">
+    <text class="section-title">支出分类</text>
+    <view class="category-stats">
+      <view class="category-stat-item" wx:for="{{expenseCategories}}" wx:key="id">
+        <view class="category-info">
+          <text class="category-icon">{{item.icon}}</text>
+          <view class="category-details">
+            <text class="category-name">{{item.name}}</text>
+            <text class="category-percentage">{{item.percentage}}%</text>
+          </view>
+        </view>
+        <text class="category-amount">¥{{item.amount}}</text>
+      </view>
+    </view>
+    
+    <!-- 饼图占位 -->
+    <view class="chart-placeholder">
+      <text class="chart-text">饼图展示</text>
+    </view>
+  </view>
+
+  <!-- 收入分类统计 -->
+  <view class="card" wx:if="{{incomeCategories.length > 0}}">
+    <text class="section-title">收入分类</text>
+    <view class="category-stats">
+      <view class="category-stat-item" wx:for="{{incomeCategories}}" wx:key="id">
+        <view class="category-info">
+          <text class="category-icon">{{item.icon}}</text>
+          <view class="category-details">
+            <text class="category-name">{{item.name}}</text>
+            <text class="category-percentage">{{item.percentage}}%</text>
+          </view>
+        </view>
+        <text class="category-amount">¥{{item.amount}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 每日趋势 -->
+  <view class="card">
+    <text class="section-title">每日趋势</text>
+    <view class="daily-trend">
+      <view class="trend-item" wx:for="{{dailyTrend}}" wx:key="date">
+        <text class="trend-date">{{item.date}}</text>
+        <view class="trend-bars">
+          <view class="trend-bar expense" style="height: {{item.expenseHeight}}%"></view>
+          <view class="trend-bar income" style="height: {{item.incomeHeight}}%"></view>
+        </view>
+        <view class="trend-amounts">
+          <text class="trend-expense">-¥{{item.expense}}</text>
+          <text class="trend-income">+¥{{item.income}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

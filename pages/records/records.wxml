@@ -1,0 +1,26 @@
+<view class="container">
+  <view class="card" wx:if="{{records.length > 0}}">
+    <view class="record-swipe" wx:for="{{records}}" wx:key="id" data-id="{{item.id}}" bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd">
+      <view class="swipe-actions">
+        <view class="btn edit" catchtap="onEdit" data-id="{{item.id}}" hover-class="button-hover">编辑</view>
+        <view class="btn delete" catchtap="onDelete" data-id="{{item.id}}" hover-class="button-hover">删除</view>
+      </view>
+      <view class="record-item" style="transform: translateX({{item.offsetX}}px);">
+        <view class="row">
+          <text class="icon">{{item.categoryIcon}}</text>
+          <view class="info">
+            <text class="title">{{item.categoryName}}</text>
+            <text class="sub">{{item.accountDisplay}} · {{item.note || '无备注'}}</text>
+            <text class="time">{{item.createTime}}</text>
+          </view>
+          <text class="amount {{item.type === 'expense' ? 'expense' : 'income'}}">{{item.type === 'expense' ? '-' : '+'}}¥{{item.amount}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="empty" wx:else>
+    <text>暂无记录</text>
+  </view>
+</view>
+
+

@@ -1,0 +1,191 @@
+/* 首页样式 */
+.month-text {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.total-text {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.amount-text {
+  font-size: 48rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.amount-text.expense {
+  color: #f44336;
+}
+
+.amount-text.income {
+  color: #4CAF50;
+}
+
+.balance-text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.budget-summary {
+  margin-top: 12rpx;
+  padding-top: 12rpx;
+  border-top: 1rpx solid #f0f0f0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12rpx;
+}
+.budget-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.budget-label {
+  color: #888;
+  font-size: 22rpx;
+}
+.budget-value {
+  color: #333;
+  font-weight: 600;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.view-all {
+  font-size: 28rpx;
+  color: #4CAF50;
+}
+
+/* 分类样式 */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  min-width: 120rpx;
+}
+
+.category-icon {
+  font-size: 48rpx;
+  margin-bottom: 10rpx;
+}
+
+.category-name {
+  font-size: 24rpx;
+  color: #333;
+}
+
+/* 记录列表样式 */
+.records-list {
+  margin-top: 20rpx;
+}
+
+.record-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.record-item:last-child {
+  border-bottom: none;
+}
+
+.record-info {
+  margin-left: 20rpx;
+}
+
+.record-title {
+  font-size: 28rpx;
+  color: #333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.record-note {
+  font-size: 24rpx;
+  color: #999;
+  display: block;
+}
+
+.record-amount {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.record-amount.expense {
+  color: #f44336;
+}
+
+.record-amount.income {
+  color: #4CAF50;
+}
+
+.record-time {
+  font-size: 22rpx;
+  color: #ccc;
+  margin-top: 10rpx;
+  text-align: right;
+}
+
+/* 空状态样式 */
+.empty-state {
+  text-align: center;
+  padding: 60rpx 0;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.empty-hint {
+  font-size: 24rpx;
+  color: #ccc;
+}
+
+/* 趋势图表样式 */
+.trend-chart {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 200rpx;
+  margin-top: 20rpx;
+  padding: 0 20rpx;
+}
+
+.chart-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.bar {
+  width: 40rpx;
+  background: linear-gradient(to top, #4CAF50, #81C784);
+  border-radius: 4rpx 4rpx 0 0;
+  min-height: 4rpx;
+  transition: height 0.3s ease;
+}
+
+.day-label {
+  font-size: 22rpx;
+  color: #666;
+  margin-top: 10rpx;
+}

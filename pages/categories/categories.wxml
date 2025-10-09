@@ -1,0 +1,44 @@
+<view class="container">
+  <view class="card">
+    <text class="section-title">分类管理</text>
+    <view class="categories-list">
+      <view class="category-top" wx:for="{{categoriesTop}}" wx:key="id">
+        <view class="top-row" bindtap="toggleExpand" data-id="{{item.id}}">
+          <text class="icon">{{item.icon}}</text>
+          <text class="name">{{item.name}}</text>
+          <text class="arrow">{{expanded[item.id] ? '˅' : '>'}}</text>
+        </view>
+        <view class="sub-list" wx:if="{{expanded[item.id]}}">
+          <view class="sub-item add-item" bindtap="openAddSub" data-id="{{item.id}}">
+            <text class="sub-icon">➕</text>
+            <text class="sub-name">添加二级分类</text>
+          </view>
+          <view class="sub-item" wx:for="{{subMenus[item.id] || []}}" wx:key="id">
+            <text class="sub-icon">{{item.icon}}</text>
+            <text class="sub-name">{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 添加二级分类弹窗 -->
+<view wx:if="{{showAddModal}}" class="modal-mask" catchtouchmove="true">
+  <view class="modal">
+    <view class="modal-title">添加二级分类</view>
+    <view class="modal-section">
+      <input class="modal-input" placeholder="请输入名称" value="{{newSubName}}" bindinput="onSubNameInput" />
+    </view>
+    <view class="modal-section">
+      <view class="icon-grid">
+        <view class="icon-cell {{newSubIcon === item ? 'active' : ''}}" wx:for="{{iconOptions}}" wx:key="*this" bindtap="chooseIcon" data-icon="{{item}}">{{item}}</view>
+      </view>
+    </view>
+    <view class="modal-actions">
+      <button class="btn cancel" bindtap="closeAddModal">取消</button>
+      <button class="btn confirm" bindtap="confirmAddSub" disabled="{{!newSubName || !newSubIcon}}">确定</button>
+    </view>
+  </view>
+</view>
+
