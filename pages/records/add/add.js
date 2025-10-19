@@ -222,6 +222,7 @@ Page({
   },
 
   onLoad(options) {
+    console.log('add页面的onLoad options', options)
     // 设置默认日期为今天
     const today = new Date()
     const dateStr = today.toISOString().split('T')[0]

@@ -51,7 +51,7 @@ Page({
     const now = new Date()
     const currentMonth = now.getMonth() + 1
     const currentYear = now.getFullYear()
-
+    
     // 筛选本月记录
     const monthRecords = records.filter(record => {
       const recordDate = new Date(record.createTime)
@@ -208,14 +208,14 @@ Page({
 
   goToAdd() {
     wx.navigateTo({
-      url: '/pages/add/add'
+      url: '/pages/records/add/add'
     })
   },
 
   quickAdd(e) {
     const category = e.currentTarget.dataset.category
     wx.navigateTo({
-      url: `/pages/add/add?category=${JSON.stringify(category)}`
+      url: `/pages/records/add/add?category=${JSON.stringify(category)}`
     })
   },
 

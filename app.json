@@ -1,13 +1,13 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/add/add",
     "pages/statistics/statistics",
     "pages/profile/profile",
     "pages/categories/categories",
     "pages/profile/budget/budget",
     "pages/records/records",
-    "pages/edit/edit"
+    "pages/records/add/add",
+    "pages/records/edit/edit"
   ],
   "window": {
     "backgroundTextStyle": "light",

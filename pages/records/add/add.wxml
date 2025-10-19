@@ -8,7 +8,7 @@
     <text class="page-title">{{editingId ? '编辑记录' : '记一笔'}}</text>
   </view>
   
-  <!-- 类型选择 -->
+  <!-- 收支选择 -->
   <view class="card">
     <view class="type-selector">
       <view class="type-item {{recordType === 'expense' ? 'active' : ''}}" bindtap="selectType" data-type="expense">
