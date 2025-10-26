@@ -1,4 +1,7 @@
 const app = getApp()
+// const Record = require('../../utils/Record.js')
+
+// const Record = app.utils.Record
 
 Page({
   data: {
@@ -32,12 +35,7 @@ Page({
     })
 
     // 设置常用分类
-    const commonCategories = [
-      { id: 1, name: '餐饮', icon: '🍽️', type: 'expense' },
-      { id: 2, name: '交通', icon: '🚗', type: 'expense' },
-      { id: 3, name: '购物', icon: '🛒', type: 'expense' },
-      { id: 9, name: '工资', icon: '💰', type: 'income' }
-    ]
+    const commonCategories = app.utils.CategoryManager.prototype.getCommonCategories.call(new app.utils.CategoryManager())
     this.setData({
       commonCategories: commonCategories
     })
@@ -97,15 +95,15 @@ Page({
     const diffBudgetBalance = (diffBudget - diffBudgetUsedThisMonth).toFixed(2)
 
     // 获取最近5条记录
-    const recentRecords = records.slice(0, 5).map(record => {
+    const recentRecords = records.slice(0, 5).map(recordData => {
+      // 使用Record类处理数据
+      const record = new app.utils.Record(recordData)
       const category = this.getCategoryInfo(record.categoryId, record.type)
-      const displayName = this.getDisplayCategoryName(record)
-      const accountDisplay = this.getAccountDisplay(record.account)
       return {
-        ...record,
+        ...record.toObject(),
         categoryIcon: category.icon,
-        categoryName: displayName,
-        accountDisplay: accountDisplay,
+        categoryName: record.getDisplayCategoryName(),
+        accountDisplay: record.getDisplayAccountName(),
         createTime: this.formatTime(record.createTime)
       }
     })
@@ -127,40 +125,11 @@ Page({
     })
   },
 
-  getAccountDisplay(account) {
-    switch (account) {
-      case 'cash':
-        return '现金'
-      case 'bank':
-        return '银行卡'
-      case 'alipay':
-        return '支付宝'
-      case 'wechat':
-        return '微信'
-      case 'fanka':
-        return '饭卡'
-      case 'credit':
-        return '福利卡'
-      case 'other':
-        return '其他'
-      default:
-        return account || '账户'
-    }
-  },
 
   getCategoryInfo(categoryId, type) {
-    const categories = app.globalData.categories[type]
-    return categories.find(cat => cat.id === categoryId) || { icon: '📝', name: '其他' }
+    return app.getCategoryInfo(categoryId, type)
   },
 
-  getDisplayCategoryName(record) {
-    // 如果有二级分类信息，显示为"一级分类-二级分类"格式
-    if (record.subCategoryName) {
-      return `${record.categoryName}-${record.subCategoryName}`
-    }
-    // 否则只显示一级分类
-    return record.categoryName
-  },
 
   formatTime(timeString) {
     const date = new Date(timeString)

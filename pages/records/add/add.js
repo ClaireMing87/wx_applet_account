@@ -1,5 +1,6 @@
 const app = getApp()
-
+// const Record = require('../../../utils/Record')
+// const Record = app.utils.Record
 Page({
   data: {
     recordType: 'expense',
@@ -35,6 +36,7 @@ Page({
         { id: 'alipay', name: '支付宝', icon: '📱' },
         { id: 'wechat', name: '微信', icon: '💚' },
         { id: 'credit', name: '福利卡', icon: '🎁' },
+        { id: 'salary', name: '工资卡', icon: '💰' },
         { id: 'other', name: '其他', icon: '📝' }
       ],
       budget: [
@@ -60,141 +62,14 @@ Page({
         // { id: 'transport', name: '交通', icon: '🚗' },
         // { id: 'shopping', name: '购物', icon: '🛒' }
       ]
-    },
-    categorySubMenus: {
-      1: [ // 餐饮
-        { id: 'null', name: '餐饮', icon: '🍽️' },
-        { id: 'meals', name: '三餐', icon:  '🍚'},
-        { id: 'snacks', name: '零食', icon: '🍿' },
-        { id: 'ingredients', name: '食材', icon: '🥬' },
-        { id: 'groceries', name: '柴米油盐', icon: '🧂' },
-        { id: 'coffee', name: '咖啡', icon: '☕' },
-        { id: 'drinks', name: '饮料', icon: '🥤' }
-      ],
-      2: [ // 交通
-        { id: 'null', name: '交通', icon: '🚗' },
-        { id: 'bus', name: '公交', icon: '🚌' },
-        { id: 'subway', name: '地铁', icon: '🚇' },
-        { id: 'taxi', name: '出租车', icon: '🚕' },
-        { id: 'gas', name: '加油', icon: '⛽' },
-        { id: 'parking', name: '停车', icon: '🅿️' },
-        { id: 'maintenance', name: '保养', icon: '🔧' }
-      ],
-      3: [ // 购物
-        { id: 'null', name: '购物', icon: '🛒' },
-        { id: 'clothes', name: '服装', icon: '👕' },
-        { id: 'electronics', name: '数码', icon: '📱' },
-        { id: 'cosmetics', name: '化妆品', icon: '💄' },
-        { id: 'books', name: '图书', icon: '📚' },
-        { id: 'furniture', name: '家具', icon: '🪑' },
-        { id: 'daily', name: '日用品', icon: '🧴' }
-      ],
-      4: [ // 娱乐
-        { id: 'movie', name: '电影', icon: '🎬' },
-        { id: 'game', name: '游戏', icon: '🎮' },
-        { id: 'music', name: '音乐', icon: '🎵' },
-        { id: 'sports', name: '运动', icon: '⚽' },
-        { id: 'travel', name: '旅游', icon: '✈️' },
-        { id: 'party', name: '聚会', icon: '🎉' }
-      ],
-      5: [ // 医疗
-        { id: 'medicine', name: '药品', icon: '💊' },
-        { id: 'hospital', name: '医院', icon: '🏥' },
-        { id: 'checkup', name: '体检', icon: '🩺' },
-        { id: 'dental', name: '牙科', icon: '🦷' },
-        { id: 'optical', name: '眼科', icon: '👓' },
-        { id: 'health', name: '保健品', icon: '💊' }
-      ],
-      6: [ // 教育
-        { id: 'tuition', name: '学费', icon: '🎓' },
-        { id: 'books', name: '教材', icon: '📖' },
-        { id: 'course', name: '课程', icon: '📝' },
-        { id: 'training', name: '培训', icon: '🎯' },
-        { id: 'exam', name: '考试', icon: '📋' },
-        { id: 'stationery', name: '文具', icon: '✏️' }
-      ],
-      7: [ // 住房
-        { id: 'rent', name: '房租', icon: '🏠' },
-        { id: 'mortgage', name: '房贷', icon: '🏡' },
-        { id: 'utilities', name: '水电费', icon: '💡' },
-        { id: 'internet', name: '网络', icon: '📶' },
-        { id: 'furniture', name: '家具', icon: '🪑' },
-        { id: 'decoration', name: '装修', icon: '🎨' }
-      ],
-      8: [ // 通讯
-        { id: 'phone', name: '话费', icon: '📱' },
-        { id: 'internet', name: '宽带', icon: '📶' },
-        { id: 'app', name: '应用', icon: '📲' },
-        { id: 'service', name: '服务费', icon: '🔧' }
-      ],
-      9: [ // 服装
-        { id: 'clothes', name: '衣服', icon: '👕' },
-        { id: 'shoes', name: '鞋子', icon: '👟' },
-        { id: 'accessories', name: '配饰', icon: '👒' },
-        { id: 'underwear', name: '内衣', icon: '👙' },
-        { id: 'bags', name: '包包', icon: '👜' },
-        { id: 'jewelry', name: '首饰', icon: '💍' }
-      ],
-      10: [ // 美容
-        { id: 'skincare', name: '护肤', icon: '🧴' },
-        { id: 'makeup', name: '彩妆', icon: '💄' },
-        { id: 'hair', name: '美发', icon: '💇' },
-        { id: 'nails', name: '美甲', icon: '💅' },
-        { id: 'spa', name: 'SPA', icon: '🧖' },
-        { id: 'fitness', name: '健身', icon: '💪' }
-      ],
-      11: [ // 运动
-        { id: 'gym', name: '健身房', icon: '💪' },
-        { id: 'equipment', name: '器材', icon: '🏋️' },
-        { id: 'clothes', name: '运动服', icon: '👕' },
-        { id: 'shoes', name: '运动鞋', icon: '👟' },
-        { id: 'coach', name: '教练', icon: '👨‍🏫' },
-        { id: 'competition', name: '比赛', icon: '🏆' }
-      ],
-      12: [ // 旅行
-        { id: 'flight', name: '机票', icon: '✈️' },
-        { id: 'hotel', name: '酒店', icon: '🏨' },
-        { id: 'train', name: '火车', icon: '🚄' },
-        { id: 'food', name: '餐饮', icon: '🍽️' },
-        { id: 'ticket', name: '门票', icon: '🎫' },
-        { id: 'shopping', name: '购物', icon: '🛒' }
-      ],
-      13: [ // 保险
-        { id: 'health', name: '健康险', icon: '🏥' },
-        { id: 'life', name: '人寿险', icon: '👤' },
-        { id: 'car', name: '车险', icon: '🚗' },
-        { id: 'property', name: '财产险', icon: '🏠' },
-        { id: 'travel', name: '旅游险', icon: '✈️' },
-        { id: 'accident', name: '意外险', icon: '🛡️' }
-      ],
-      14: [ // 水电
-        { id: 'electricity', name: '电费', icon: '💡' },
-        { id: 'water', name: '水费', icon: '💧' },
-        { id: 'gas', name: '燃气费', icon: '🔥' },
-        { id: 'heating', name: '暖气费', icon: '🌡️' },
-        { id: 'trash', name: '垃圾费', icon: '🗑️' },
-        { id: 'management', name: '物业费', icon: '🏢' }
-      ],
-      15: [ // 维修
-        { id: 'home', name: '房屋维修', icon: '🏠' },
-        { id: 'appliance', name: '家电维修', icon: '🔧' },
-        { id: 'car', name: '汽车维修', icon: '🚗' },
-        { id: 'phone', name: '手机维修', icon: '📱' },
-        { id: 'computer', name: '电脑维修', icon: '💻' },
-        { id: 'other', name: '其他维修', icon: '🔨' }
-      ],
-      16: [ // 其他
-        { id: 'gift', name: '礼品', icon: '🎁' },
-        { id: 'donation', name: '捐赠', icon: '❤️' },
-        { id: 'fine', name: '罚款', icon: '💰' },
-        { id: 'fee', name: '手续费', icon: '💳' },
-        { id: 'other', name: '其他', icon: '📝' }
-      ]
     }
   },
 
-  setEditData(record) {
-    if (!record) return
+  setEditData(recordData) {
+    if (!recordData) return
+    
+    // 使用Record类处理数据
+    const record = new app.utils.Record(recordData)
     
     this.setData({
       recordType: record.type,
@@ -259,28 +134,9 @@ Page({
     // 编辑模式：预填充
     if (options.edit) {
       try {
-        const record = JSON.parse(decodeURIComponent(options.edit))
-        this.setData({
-          recordType: record.type,
-          amount: String(record.amount),
-          selectedCategory: {
-            id: record.categoryId,
-            name: record.categoryName,
-            icon: record.categoryIcon,
-            subId: record.subCategoryId,
-            subName: record.subCategoryName,
-            subIcon: record.subCategoryIcon
-          },
-          selectedAccount: record.account,
-          selectedAccountName: '',
-          selectedAccountIcon: '',
-          note: record.note || '',
-          date: record.date || dateStr,
-          dateTime: record.dateTime || dateTime,
-          budgetScope: record.budgetScope || (record.includeInMonthly === false ? 'year' : 'month'),
-          includeInMonthly: record.includeInMonthly !== false,
-          editingId: record.id
-        })
+        const recordData = JSON.parse(decodeURIComponent(options.edit))
+        console.log('add页面的onLoad record', recordData)
+        this.setEditData(recordData)
       } catch (e) { console.error('编辑参数解析失败', e) }
     }
 
@@ -322,7 +178,7 @@ Page({
   },
 
   updateCategories() {
-    const categories = app.globalData.categories[this.data.recordType]
+    const categories = app.getCategories(this.data.recordType)
     this.setData({
       categories: categories
     })
@@ -371,15 +227,35 @@ Page({
       selectedCategory: {}
     })
     this.updateCategories()
+    
+    // 如果选择收入，设置默认分类为工资，默认账户为工资卡
+    if (type === 'income') {
+      this.setData({
+        selectedCategory: {
+          id: 17,
+          name: '工资',
+          icon: '💰'
+        },
+        selectedAccount: 'salary',
+        selectedAccountName: '工资卡',
+        selectedAccountIcon: '💰'
+      })
+    } else {
+      // 如果选择支出，重置账户选择
+      this.setData({
+        selectedAccount: '未选择账户',
+        selectedAccountName: '',
+        selectedAccountIcon: ''
+      })
+    }
+    
     this.checkCanSave()
   },
 
   selectCategory(e) {
     const category = e.currentTarget.dataset.category
-    // 合并默认与自定义子类
-    const custom = (app.globalData.customSubMenus || {})[category.id] || []
-    const defaults = this.data.categorySubMenus[category.id] || []
-    const subMenuItems = [...defaults, ...custom]
+    // 使用CategoryManager获取二级分类
+    const subMenuItems = app.getSubCategories(category.id)
     
     if (subMenuItems && subMenuItems.length > 0) {
       // 如果有二级分类，显示二级分类选择
@@ -605,29 +481,43 @@ Page({
       amount = amount.slice(0, -1) // 移除末尾的小数点
     }
     
-        const record = {
-          type: this.data.recordType,
-          amount: parseFloat(amount),
-          categoryId: this.data.selectedCategory.id,
-          categoryName: this.data.selectedCategory.name,
-          categoryIcon: this.data.selectedCategory.icon,
-          subCategoryId: this.data.selectedCategory.subId || null,
-          subCategoryName: this.data.selectedCategory.subName || null,
-          subCategoryIcon: this.data.selectedCategory.subIcon || null,
-          account: this.data.selectedAccount,
-          note: this.data.note,
-          date: this.data.date,
-          dateTime: this.data.dateTime,
-          includeInMonthly: this.data.includeInMonthly,
-          budgetScope: this.data.budgetScope
-        }
+    // 使用Record类创建记录
+    const record = new app.utils.Record({
+      id: this.data.editingId || null,
+      type: this.data.recordType,
+      amount: parseFloat(amount),
+      note: this.data.note,
+      date: this.data.date,
+      dateTime: this.data.dateTime,
+      includeInMonthly: this.data.includeInMonthly,
+      budgetScope: this.data.budgetScope
+    })
+
+    // 设置分类信息
+    record.setCategory(this.data.selectedCategory)
+    
+    // 设置账户信息
+    record.setAccount({
+      id: this.data.selectedAccount,
+      name: this.data.selectedAccountName,
+      icon: this.data.selectedAccountIcon
+    })
+
+    // 验证记录
+    const validation = record.validate()
+    if (!validation.isValid) {
+      wx.showToast({
+        title: validation.errors[0],
+        icon: 'error'
+      })
+      return
+    }
 
     // 保存/更新记录
     if (this.data.editingId) {
-      record.id = this.data.editingId
-      app.updateRecord(record)
+      app.updateRecord(record.toObject())
     } else {
-      app.addRecord(record)
+      app.addRecord(record.toObject())
     }
 
     // 显示成功提示

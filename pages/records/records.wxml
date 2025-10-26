@@ -1,6 +1,52 @@
 <view class="container">
-  <view class="card" wx:if="{{records.length > 0}}">
-    <view class="record-swipe" wx:for="{{records}}" wx:key="id" data-id="{{item.id}}" bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd">
+  <!-- 筛选栏 -->
+  <view class="filter-container">
+    <!-- 筛选按钮行 -->
+    <view class="filter-buttons">
+      <view class="filter-btn" bindtap="showTimeFilter">
+        <text class="filter-icon">📅</text>
+        <text class="filter-text">时间</text>
+      </view>
+      <view class="filter-btn" bindtap="showTypeFilter">
+        <text class="filter-icon">💰</text>
+        <text class="filter-text">收支</text>
+      </view>
+      <view class="filter-btn" bindtap="showCategoryFilter">
+        <text class="filter-icon">🏷️</text>
+        <text class="filter-text">分类</text>
+      </view>
+      <view class="filter-btn" bindtap="showAccountFilter">
+        <text class="filter-icon">💳</text>
+        <text class="filter-text">账户</text>
+      </view>
+    </view>
+    
+    <!-- 筛选标签行 -->
+    <view class="filter-tags" wx:if="{{hasActiveFilters}}">
+      <view class="filter-tag" wx:if="{{timeFilter !== 'all'}}" bindtap="clearTimeFilter">
+        <text class="tag-text">时间: {{filterTimeText}}</text>
+        <text class="tag-close">×</text>
+      </view>
+      <view class="filter-tag" wx:if="{{typeFilter !== 'all'}}" bindtap="clearTypeFilter">
+        <text class="tag-text">收支: {{filterTypeText}}</text>
+        <text class="tag-close">×</text>
+      </view>
+      <view class="filter-tag" wx:if="{{categoryFilter !== 'all'}}" bindtap="clearCategoryFilter">
+        <text class="tag-text">分类: {{filterCategoryText}}</text>
+        <text class="tag-close">×</text>
+      </view>
+      <view class="filter-tag" wx:if="{{accountFilter !== 'all'}}" bindtap="clearAccountFilter">
+        <text class="tag-text">账户: {{filterAccountText}}</text>
+        <text class="tag-close">×</text>
+      </view>
+      <view class="filter-clear-all" bindtap="clearFilters">
+        <text class="clear-all-text">清除全部</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{filteredRecords.length > 0}}">
+    <view class="record-swipe" wx:for="{{filteredRecords}}" wx:key="id" data-id="{{item.id}}" bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd">
       <view class="swipe-actions">
         <view class="btn edit" catchtap="onEdit" data-id="{{item.id}}" hover-class="button-hover">编辑</view>
         <view class="btn delete" catchtap="onDelete" data-id="{{item.id}}" hover-class="button-hover">删除</view>
@@ -19,7 +65,108 @@
     </view>
   </view>
   <view class="empty" wx:else>
-    <text>暂无记录</text>
+    <text>{{hasActiveFilters ? '没有符合条件的记录' : '暂无记录'}}</text>
+  </view>
+
+  <!-- 时间筛选弹窗 -->
+  <view class="filter-popup" wx:if="{{showTimeFilter}}" catchtap="hideTimeFilter">
+    <view class="popup-content" catchtap="">
+      <view class="popup-title">选择时间范围</view>
+      
+      <!-- 时间选项 -->
+      <view class="time-options">
+        <view class="time-option {{timeFilter === 'all' ? 'active' : ''}}" bindtap="selectTimeFilter" data-value="all">全部时间</view>
+        <view class="time-option {{timeFilter === 'today' ? 'active' : ''}}" bindtap="selectTimeFilter" data-value="today">今天</view>
+        <view class="time-option {{timeFilter === 'week' ? 'active' : ''}}" bindtap="selectTimeFilter" data-value="week">本周</view>
+        <view class="time-option {{timeFilter === 'month' ? 'active' : ''}}" bindtap="selectTimeFilter" data-value="month">本月</view>
+        <view class="time-option {{timeFilter === 'year' ? 'active' : ''}}" bindtap="selectTimeFilter" data-value="year">今年</view>
+        <view class="time-option {{timeFilter === 'custom' ? 'active' : ''}}" bindtap="showCustomTimePicker">自定义</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 自定义时间选择弹窗 -->
+  <view class="filter-popup" wx:if="{{showCustomTimePicker}}" catchtap="hideCustomTimePicker">
+    <view class="popup-content custom-time-content" catchtap="">
+      <view class="popup-title">选择时间范围</view>
+      
+      <!-- 开始时间选择 -->
+      <view class="time-picker-section">
+        <view class="time-picker-label">开始时间</view>
+        <picker mode="date" value="{{customStartDate}}" bindchange="onStartDateChange">
+          <view class="time-picker-value">
+            <text class="picker-text">{{customStartDate || '请选择开始日期'}}</text>
+            <text class="picker-arrow">📅</text>
+          </view>
+        </picker>
+      </view>
+      
+      <!-- 结束时间选择 -->
+      <view class="time-picker-section">
+        <view class="time-picker-label">结束时间</view>
+        <picker mode="date" value="{{customEndDate}}" bindchange="onEndDateChange">
+          <view class="time-picker-value">
+            <text class="picker-text">{{customEndDate || '请选择结束日期'}}</text>
+            <text class="picker-arrow">📅</text>
+          </view>
+        </picker>
+      </view>
+      
+      <!-- 操作按钮 -->
+      <view class="custom-time-actions">
+        <view class="time-action-btn cancel-btn" bindtap="hideCustomTimePicker">取消</view>
+        <view class="time-action-btn confirm-btn" bindtap="confirmCustomTime" wx:if="{{customStartDate && customEndDate}}">确定</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 收支筛选弹窗 -->
+  <view class="filter-popup" wx:if="{{showTypeFilter}}" catchtap="hideTypeFilter">
+    <view class="popup-content" catchtap="">
+      <view class="popup-title">选择收支类型</view>
+      <view class="type-options">
+        <view class="type-option {{typeFilter === 'all' ? 'active' : ''}}" bindtap="selectTypeFilter" data-value="all">全部</view>
+        <view class="type-option {{typeFilter === 'expense' ? 'active' : ''}}" bindtap="selectTypeFilter" data-value="expense">支出</view>
+        <view class="type-option {{typeFilter === 'income' ? 'active' : ''}}" bindtap="selectTypeFilter" data-value="income">收入</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 分类筛选弹窗 -->
+  <view class="filter-popup" wx:if="{{showCategoryFilter}}" catchtap="hideCategoryFilter">
+    <view class="popup-content" catchtap="">
+      <view class="popup-title">选择分类</view>
+      <view class="category-options" wx:if="{{typeFilter !== 'all'}}">
+        <view class="category-option {{categoryFilter === 'all' ? 'active' : ''}}" bindtap="selectCategoryFilter" data-value="all">全部分类</view>
+        <view class="category-option" wx:for="{{filteredCategories}}" wx:key="id" 
+              class="{{categoryFilter === item.id ? 'active' : ''}}" 
+              bindtap="selectCategoryFilter" data-value="{{item.id}}">
+          <text class="category-icon">{{item.icon}}</text>
+          <text class="category-name">{{item.name}}</text>
+        </view>
+      </view>
+      <view class="category-options" wx:else>
+        <view class="category-tip">
+          <text>请先选择收支类型</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 账户筛选弹窗 -->
+  <view class="filter-popup" wx:if="{{showAccountFilter}}" catchtap="hideAccountFilter">
+    <view class="popup-content" catchtap="">
+      <view class="popup-title">选择账户</view>
+      <view class="account-options">
+        <view class="account-option {{accountFilter === 'all' ? 'active' : ''}}" bindtap="selectAccountFilter" data-value="all">全部账户</view>
+        <view class="account-option" wx:for="{{allAccounts}}" wx:key="id" 
+              class="{{accountFilter === item.id ? 'active' : ''}}" 
+              bindtap="selectAccountFilter" data-value="{{item.id}}">
+          <text class="account-icon">{{item.icon}}</text>
+          <text class="account-name">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
   </view>
 </view>
 

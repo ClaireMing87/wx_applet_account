@@ -1,43 +1,22 @@
+const Record = require('./utils/Record.js')
+const CategoryManager = require('./utils/CategoryManager.js')
+
 App({
   globalData: {
     userInfo: null,
     records: [],
     budget: { yearBudget: 0, monthBudget: 0 },
-    categories: {
-      expense: [
-        { id: 1, name: '餐饮', icon: '🍽️' },
-        { id: 2, name: '交通', icon: '🚗' },
-        { id: 3, name: '购物', icon: '🛒' },
-        { id: 4, name: '娱乐', icon: '🎮' },
-        { id: 5, name: '医疗', icon: '💊' },
-        { id: 6, name: '教育', icon: '📚' },
-        { id: 7, name: '住房', icon: '🏠' },
-        { id: 8, name: '通讯', icon: '📱' },
-        { id: 9, name: '服装', icon: '👕' },
-        { id: 10, name: '美容', icon: '💄' },
-        { id: 11, name: '运动', icon: '⚽' },
-        { id: 12, name: '旅行', icon: '✈️' },
-        { id: 13, name: '保险', icon: '🛡️' },
-        { id: 14, name: '水电', icon: '💡' },
-        { id: 15, name: '维修', icon: '🔧' },
-        { id: 16, name: '其他', icon: '📝' }
-      ],
-      income: [
-        { id: 17, name: '工资', icon: '💰' },
-        { id: 18, name: '奖金', icon: '🎁' },
-        { id: 19, name: '投资', icon: '📈' },
-        { id: 20, name: '兼职', icon: '💼' },
-        { id: 21, name: '红包', icon: '🧧' },
-        { id: 22, name: '退款', icon: '↩️' },
-        { id: 23, name: '理财', icon: '💹' },
-        { id: 24, name: '其他', icon: '📝' }
-      ]
-    },
     // 用户自定义二级分类：{ [topId: number]: Array<{id,name,icon}> }
     customSubMenus: {}
   },
-
+  utils: {
+    Record: Record,
+    CategoryManager: CategoryManager
+  },
   onLaunch() {
+    // 初始化分类管理器
+    this.categoryManager = new CategoryManager()
+    
     // 获取本地存储的记录
     const records = wx.getStorageSync('records') || []
     
@@ -68,6 +47,29 @@ App({
         }
       }
     })
+  },
+
+  // 获取分类数据的方法
+  getCategories(type) {
+    return this.categoryManager.getCategories(type)
+  },
+
+  // 获取二级分类数据的方法
+  getSubCategories(categoryId) {
+    return this.categoryManager.getSubCategories(categoryId, this.globalData.customSubMenus)
+  },
+
+  // 添加自定义二级分类
+  addCustomSubCategory(categoryId, name, icon) {
+    const updatedCustom = this.categoryManager.addCustomSubCategory(categoryId, name, icon, this.globalData.customSubMenus)
+    this.globalData.customSubMenus = updatedCustom
+    wx.setStorageSync('customSubMenus', updatedCustom)
+    return updatedCustom
+  },
+
+  // 获取分类信息
+  getCategoryInfo(categoryId, type) {
+    return this.categoryManager.getCategoryInfo(categoryId, type)
   },
 
   // 添加记录

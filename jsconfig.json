@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "baseUrl": ".",
+    // "checkJs": false,
+    "paths": {
+      "@/*": ["./*"],
+      "@/utils/*": ["./utils/*"]
+    }
+  },
+  "include": [
+    "**/*.js",
+    "**/*.wxml",
+    "**/*.wxss",
+    "**/*.json"
+  ],
+  "exclude": [
+    "node_modules",
+    "miniprogram_npm"
+  ]
+}

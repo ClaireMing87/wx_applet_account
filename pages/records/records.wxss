@@ -1,4 +1,226 @@
 .container { padding: 12rpx; }
+
+/* 筛选容器样式 */
+.filter-container {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
+}
+
+/* 筛选按钮行 */
+.filter-buttons {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.filter-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16rpx 8rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:active {
+  background: #e9ecef;
+  transform: scale(0.98);
+}
+
+.filter-icon {
+  font-size: 32rpx;
+  margin-bottom: 8rpx;
+}
+
+.filter-text {
+  font-size: 24rpx;
+  color: #495057;
+  font-weight: 500;
+}
+
+/* 筛选标签行 */
+.filter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  align-items: center;
+}
+
+.filter-tag {
+  display: flex;
+  align-items: center;
+  background: #007AFF;
+  color: #fff;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  gap: 8rpx;
+}
+
+.tag-text {
+  white-space: nowrap;
+}
+
+.tag-close {
+  font-size: 28rpx;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 2rpx;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  width: 32rpx;
+  height: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-clear-all {
+  background: #f8f9fa;
+  color: #6c757d;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  border: 1rpx solid #dee2e6;
+}
+
+.clear-all-text {
+  white-space: nowrap;
+}
+
+/* 筛选弹窗样式 */
+.filter-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+}
+
+.popup-content {
+  background: #fff;
+  width: 100%;
+  max-height: 60vh;
+  border-radius: 20rpx 20rpx 0 0;
+  padding: 30rpx;
+}
+
+.popup-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.time-options, .category-options, .account-options, .type-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.time-option, .category-option, .account-option, .type-option {
+  padding: 20rpx;
+  border-radius: 12rpx;
+  background: #f8f8f8;
+  display: flex;
+  align-items: center;
+  gap: 15rpx;
+}
+
+.time-option.active, .category-option.active, .account-option.active, .type-option.active {
+  background: #007AFF;
+  color: #fff;
+}
+
+.category-tip {
+  padding: 40rpx;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 自定义时间选择样式 */
+.custom-time-content {
+  max-height: 70vh;
+}
+
+.time-picker-section {
+  margin-bottom: 30rpx;
+}
+
+.time-picker-label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+  font-weight: 500;
+}
+
+.time-picker-value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  border: 2rpx solid #e9ecef;
+}
+
+.picker-text {
+  font-size: 28rpx;
+  color: #333;
+  flex: 1;
+}
+
+.picker-arrow {
+  font-size: 24rpx;
+  color: #6c757d;
+}
+
+.custom-time-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 40rpx;
+}
+
+.time-action-btn {
+  flex: 1;
+  padding: 20rpx;
+  text-align: center;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.cancel-btn {
+  background: #f8f9fa;
+  color: #6c757d;
+  border: 2rpx solid #e9ecef;
+}
+
+.confirm-btn {
+  background: #007AFF;
+  color: #fff;
+}
+
+
+.category-icon, .account-icon {
+  font-size: 32rpx;
+}
+
+.category-name, .account-name {
+  font-size: 28rpx;
+}
 .card { background: #fff; border-radius: 16rpx; padding: 10rpx 20rpx; }
 .record-item { 
   padding: 18rpx 0; 

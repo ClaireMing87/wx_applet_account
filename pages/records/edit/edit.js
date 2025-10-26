@@ -13,7 +13,7 @@ Page({
         this.setData({ record })
         // 直接跳转到记账页面，替换当前页面
         wx.redirectTo({
-          url: `/pages/records/records/add/add?edit=${encodeURIComponent(JSON.stringify(record))}`,
+          url: `/pages/records/add/add?edit=${encodeURIComponent(JSON.stringify(record))}`,
           success: () => {
             // 等待页面切换完成后，设置编辑数据
             setTimeout(() => {
